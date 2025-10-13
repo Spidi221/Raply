@@ -2,10 +2,11 @@ import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { useLocale } from 'next-intl'
-import { StatsCards } from '@/components/dashboard/stats-cards'
-import { ReportsList } from '@/components/dashboard/reports-list'
+import { StatsCardsV2 } from '@/components/dashboard/stats-cards-v2'
+import { ReportsListV2 } from '@/components/dashboard/reports-list-v2'
 import { EmptyState } from '@/components/dashboard/empty-state'
 import { SubscriptionBanner } from '@/components/dashboard/subscription-banner'
+import { AIInsights } from '@/components/dashboard/ai-insights'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { getDashboardStats, getReports } from '@/lib/db/queries'
@@ -67,7 +68,7 @@ async function DashboardStats({ userId, locale }: { userId: string; locale: stri
     return null
   }
 
-  return <StatsCards {...stats} />
+  return <StatsCardsV2 {...stats} />
 }
 
 async function RecentReports({ userId, locale }: { userId: string; locale: string }) {
@@ -88,9 +89,9 @@ async function RecentReports({ userId, locale }: { userId: string; locale: strin
 
   return (
     <>
-      <ReportsList reports={reports} locale={locale} limit={5} />
-      {reports.length > 5 && (
-        <div className="mt-4 text-center">
+      <ReportsListV2 reports={reports} locale={locale} limit={6} />
+      {reports.length > 6 && (
+        <div className="mt-6 text-center">
           <Link href={`/${locale}/reports`}>
             <Button variant="outline">
               {t('viewAllReportsButton')}
@@ -151,6 +152,9 @@ export default async function DashboardPage({
       <Suspense fallback={<StatsCardsSkeleton />}>
         <DashboardStats userId={user.id} locale={locale} />
       </Suspense>
+
+      {/* AI Insights Section */}
+      {!admin && <AIInsights />}
 
       {/* Recent Reports */}
       <div>

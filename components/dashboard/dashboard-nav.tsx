@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations, useLocale } from 'next-intl'
@@ -12,6 +13,8 @@ import {
   Settings,
   ShieldCheck,
   LogOut,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
 import { signOut } from '@/lib/auth/actions'
@@ -25,6 +28,22 @@ export function DashboardNav({ user, isAdmin }: DashboardNavProps) {
   const pathname = usePathname()
   const t = useTranslations('dashboard.nav')
   const locale = useLocale()
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
+  // Load collapsed state from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('sidebar-collapsed')
+    if (saved !== null) {
+      setIsCollapsed(saved === 'true')
+    }
+  }, [])
+
+  // Save collapsed state to localStorage
+  const toggleCollapsed = () => {
+    const newState = !isCollapsed
+    setIsCollapsed(newState)
+    localStorage.setItem('sidebar-collapsed', String(newState))
+  }
 
   const navItems = [
     {
@@ -63,14 +82,26 @@ export function DashboardNav({ user, isAdmin }: DashboardNavProps) {
   }
 
   return (
-    <aside className="w-64 border-r bg-background">
+    <aside
+      className={cn(
+        'border-r bg-background transition-all duration-300',
+        isCollapsed ? 'w-20' : 'w-64'
+      )}
+    >
       <div className="flex h-full flex-col">
         {/* Logo */}
-        <div className="flex h-16 items-center border-b px-6">
-          <Link href={`/${locale}`} className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary" />
-            <span className="text-xl font-bold">Raply</span>
-          </Link>
+        <div className="flex h-16 items-center justify-between border-b px-4">
+          {!isCollapsed && (
+            <Link href={`/${locale}`} className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-primary" />
+              <span className="text-xl font-bold">Raply</span>
+            </Link>
+          )}
+          {isCollapsed && (
+            <Link href={`/${locale}`} className="flex items-center justify-center w-full">
+              <div className="h-8 w-8 rounded-lg bg-primary" />
+            </Link>
+          )}
         </div>
 
         {/* Navigation */}
@@ -84,41 +115,78 @@ export function DashboardNav({ user, isAdmin }: DashboardNavProps) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                  'flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                  isCollapsed ? 'justify-center' : 'gap-3',
                   isActive
                     ? 'bg-primary text-primary-foreground'
                     : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                 )}
+                title={isCollapsed ? item.label : undefined}
               >
-                <Icon className="h-5 w-5" />
-                {item.label}
+                <Icon className="h-5 w-5 flex-shrink-0" />
+                {!isCollapsed && <span>{item.label}</span>}
               </Link>
             )
           })}
         </nav>
 
+        {/* Collapse Toggle Button */}
+        <div className="border-t p-4">
+          <Button
+            onClick={toggleCollapsed}
+            variant="ghost"
+            size="sm"
+            className={cn(
+              'w-full justify-center',
+              !isCollapsed && 'justify-start'
+            )}
+          >
+            {isCollapsed ? (
+              <ChevronRight className="h-4 w-4" />
+            ) : (
+              <>
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                <span>Collapse</span>
+              </>
+            )}
+          </Button>
+        </div>
+
         {/* User Section */}
         <div className="border-t p-4">
-          <div className="mb-3 flex items-center gap-3 px-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
-              {user.email?.[0]?.toUpperCase()}
+          {!isCollapsed && (
+            <div className="mb-3 flex items-center gap-3 px-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+                {user.email?.[0]?.toUpperCase()}
+              </div>
+              <div className="flex-1 overflow-hidden">
+                <p className="truncate text-sm font-medium">{user.email}</p>
+                {isAdmin && (
+                  <p className="text-xs text-muted-foreground">Admin</p>
+                )}
+              </div>
             </div>
-            <div className="flex-1 overflow-hidden">
-              <p className="truncate text-sm font-medium">{user.email}</p>
-              {isAdmin && (
-                <p className="text-xs text-muted-foreground">Admin</p>
-              )}
+          )}
+          {isCollapsed && (
+            <div className="mb-3 flex justify-center">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+                {user.email?.[0]?.toUpperCase()}
+              </div>
             </div>
-          </div>
+          )}
           <form action={handleSignOut}>
             <Button
               type="submit"
               variant="ghost"
-              className="w-full justify-start text-muted-foreground"
+              className={cn(
+                'w-full text-muted-foreground',
+                isCollapsed ? 'justify-center px-2' : 'justify-start'
+              )}
               size="sm"
+              title={isCollapsed ? 'Sign Out' : undefined}
             >
-              <LogOut className="mr-2 h-4 w-4" />
-              Sign Out
+              <LogOut className={cn('h-4 w-4', !isCollapsed && 'mr-2')} />
+              {!isCollapsed && 'Sign Out'}
             </Button>
           </form>
         </div>

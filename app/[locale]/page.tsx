@@ -28,7 +28,7 @@ export default async function HomePage() {
   }
 
   return (
-    <>
+    <div className="gradient-mesh min-h-screen">
       <Navbar />
       <main>
         <Hero />
@@ -39,6 +39,6 @@ export default async function HomePage() {
         <FinalCTA />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
