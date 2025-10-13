@@ -841,7 +841,7 @@
       "id": 12,
       "title": "Design System Migration - Upgrade to Professional Design",
       "description": "Migrate from basic design to professional design with gradients, glass morphism, animations, sparklines, Command Palette, dark mode, and all visual enhancements from Figma Make demo. Strategy: Create NEW components instead of modifying existing to avoid breaking code.",
-      "status": "pending",
+      "status": "completed",
       "priority": "critical",
       "assignee": "claude",
       "tags": ["design", "ui", "ux", "migration", "figma"],
@@ -850,32 +850,32 @@
         {
           "id": "12.1",
           "title": "Phase 1: Setup - Extract design system styles from Figma Make",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "2h",
           "notes": "Extract from temp_design/src/index.css and temp_design/src/App.tsx",
           "children": [
             {
               "id": "12.1.1",
               "title": "Extract color variables (gradients, glass colors)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.1.2",
               "title": "Extract custom CSS classes (glass, glass-intense, gradient-mesh)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.1.3",
               "title": "Add extracted styles to app/globals.css WITHOUT breaking existing",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "45m"
             },
             {
               "id": "12.1.4",
               "title": "Test that existing pages still work after CSS changes",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -883,44 +883,44 @@
         {
           "id": "12.2",
           "title": "Phase 2: Dashboard - Upgrade StatCards component",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "4h",
           "notes": "Create NEW StatCard component with gradients and sparklines",
           "children": [
             {
               "id": "12.2.1",
               "title": "Create NEW StatCard component with gradients (don't modify old yet)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.2.2",
               "title": "Add sparkline mini-charts to StatCard using Recharts",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.2.3",
               "title": "Add hover animations (scale, glow) to StatCard",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.2.4",
               "title": "Add platform data pie charts (for ROAS card)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "45m"
             },
             {
               "id": "12.2.5",
               "title": "Replace old StatsCards in dashboard/page.tsx with new version",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.2.6",
               "title": "Test dashboard stats cards render correctly",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -928,38 +928,38 @@
         {
           "id": "12.3",
           "title": "Phase 3: Dashboard - Upgrade Sidebar (collapsible + dark mode)",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "3.5h",
           "notes": "Add collapse/expand and dark mode toggle",
           "children": [
             {
               "id": "12.3.1",
               "title": "Add collapse/expand functionality to DashboardNav",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.3.2",
               "title": "Create TopBar component with dark mode toggle",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.3.3",
               "title": "Implement dark mode state management (localStorage + theme toggle)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.3.4",
               "title": "Update dashboard layout to work with collapsible sidebar",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.3.5",
               "title": "Test sidebar collapse/expand and dark mode toggle",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -967,38 +967,38 @@
         {
           "id": "12.4",
           "title": "Phase 4: Dashboard - Upgrade Reports List",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "3.5h",
           "notes": "Create NEW ReportCard with thumbnails and platform badges",
           "children": [
             {
               "id": "12.4.1",
               "title": "Create NEW ReportCard with thumbnails and platform badges",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1.5h"
             },
             {
               "id": "12.4.2",
               "title": "Add masonry grid layout for reports list",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.4.3",
               "title": "Add AI generated badge and views count",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.4.4",
               "title": "Replace old ReportsList with new version in dashboard",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.4.5",
               "title": "Test reports list displays correctly with new cards",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -1006,32 +1006,32 @@
         {
           "id": "12.5",
           "title": "Phase 5: Dashboard - Add AI Insights Section",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "2.5h",
           "notes": "New section between stats and reports",
           "children": [
             {
               "id": "12.5.1",
               "title": "Create AIInsights component with glass morphism",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.5.2",
               "title": "Add insight cards with Apply/Dismiss buttons",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.5.3",
               "title": "Add AI Insights section to dashboard page (between stats and reports)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.5.4",
               "title": "Test AI Insights section displays correctly",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -1039,38 +1039,38 @@
         {
           "id": "12.6",
           "title": "Phase 6: Dashboard - Add Command Palette",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "3h",
           "notes": "Cmd/Ctrl + K keyboard shortcut for quick actions",
           "children": [
             {
               "id": "12.6.1",
               "title": "Install cmdk package for Command Palette",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             },
             {
               "id": "12.6.2",
               "title": "Create CommandPalette component",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1.5h"
             },
             {
               "id": "12.6.3",
               "title": "Add keyboard shortcut (Cmd/Ctrl + K) to open palette",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.6.4",
               "title": "Add command palette to dashboard layout",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.6.5",
               "title": "Test Command Palette opens with Cmd+K and works",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -1078,26 +1078,26 @@
         {
           "id": "12.7",
           "title": "Phase 7: Dashboard - Add Floating Action Button",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "1.5h",
           "notes": "Fixed bottom-right FAB for quick report creation",
           "children": [
             {
               "id": "12.7.1",
               "title": "Create FloatingActionButton component",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "45m"
             },
             {
               "id": "12.7.2",
               "title": "Add to dashboard layout (fixed bottom-right)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.7.3",
               "title": "Test FAB appears and links to create report",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -1105,44 +1105,44 @@
         {
           "id": "12.8",
           "title": "Phase 8: Landing Page - Add Visual Effects",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "4h",
           "notes": "Enhance landing page with gradients, glass morphism, animations",
           "children": [
             {
               "id": "12.8.1",
               "title": "Add gradient-mesh background to landing page",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.8.2",
               "title": "Add glass morphism to Hero section cards",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.8.3",
               "title": "Add hover animations (scale, glow) to CTA buttons",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "45m"
             },
             {
               "id": "12.8.4",
               "title": "Add gradients to Features cards",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "1h"
             },
             {
               "id": "12.8.5",
               "title": "Add sparklines to Features section (optional mini charts)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.8.6",
               "title": "Test landing page looks good and animates smoothly",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             }
           ]
@@ -1150,50 +1150,50 @@
         {
           "id": "12.9",
           "title": "Phase 9: Final Testing & Polish",
-          "status": "pending",
+          "status": "completed",
           "estimatedTime": "3h",
           "notes": "Comprehensive testing and deployment",
           "children": [
             {
               "id": "12.9.1",
               "title": "Run full TypeScript type check",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             },
             {
               "id": "12.9.2",
               "title": "Test all pages (landing, dashboard, admin) still work",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.9.3",
               "title": "Test responsive design (mobile, tablet, desktop)",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "45m"
             },
             {
               "id": "12.9.4",
               "title": "Test dark mode works everywhere",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             },
             {
               "id": "12.9.5",
               "title": "Production build test",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             },
             {
               "id": "12.9.6",
               "title": "Commit changes and push to GitHub",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "15m"
             },
             {
               "id": "12.9.7",
               "title": "Deploy to Vercel",
-              "status": "pending",
+              "status": "completed",
               "estimatedTime": "30m"
             }
           ]
@@ -1203,13 +1203,14 @@
       "estimatedTime": "27.5h",
       "phase": "Design Enhancement",
       "notes": "CRITICAL: Current design looks 'amatorsko z ai'. This migration adds professional polish with gradients, glass morphism, sparklines, Command Palette (Cmd+K), dark mode, collapsible sidebar, and all visual enhancements from Figma Make demo. Strategy: Create NEW components first, test thoroughly, then replace old ones. This ensures we don't break existing functionality.",
-      "figmaReference": "temp_design/ directory contains extracted Figma Make demo for reference"
+      "figmaReference": "temp_design/ directory contains extracted Figma Make demo for reference",
+      "completedAt": "2025-10-13"
     }
   ],
   "metadata": {
     "totalTasks": 14,
-    "completedTasks": 6,
-    "pendingTasks": 8,
+    "completedTasks": 7,
+    "pendingTasks": 7,
     "estimatedTotalTime": "131h",
     "mvpFlow": "Landing Page → Auth → Dashboard (Freemium) → Optional: Stripe Upgrade",
     "businessModel": "Freemium: Free (1 account, 2 reports/month, no AI) → Starter (47zł) → Pro (87zł) → Agency (177zł)",
@@ -1288,7 +1289,7 @@
       {
         "name": "Design Enhancement",
         "tasks": [12],
-        "status": "pending",
+        "status": "completed",
         "priority": "CRITICAL - Professional visual polish required before launch"
       },
       {
