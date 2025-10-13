@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
   const supabaseResponse = await updateSession(request)
 
   // Merge headers from both middlewares
-  if (intlResponse) {
+  if (intlResponse && intlResponse.headers) {
     // Copy headers from Supabase response to i18n response
     supabaseResponse.headers.forEach((value, key) => {
       intlResponse.headers.set(key, value)

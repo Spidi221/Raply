@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import { useLocale } from 'next-intl'
 import { StatsCardsV2 } from '@/components/dashboard/stats-cards-v2'
 import { ReportsListV2 } from '@/components/dashboard/reports-list-v2'
 import { EmptyState } from '@/components/dashboard/empty-state'

@@ -59,7 +59,7 @@ export function Pricing() {
         t('plan3Feature7'),
       ],
       cta: t('plan3Cta'),
-      ctaVariant: 'default' as const,
+      ctaVariant: 'outline' as const,
       highlighted: true,
     },
     {
