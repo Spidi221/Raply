@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* SnowUI Design System - Minimalist Black & White with Sky Blue Accent */
+:root {
+  /* Base Colors */
+  --background: 0 0% 100%; /* white */
+  --foreground: 0 0% 0%; /* black */
+
+  /* Card */
+  --card: 0 0% 100%; /* white */
+  --card-foreground: 0 0% 0%; /* black */
+
+  /* Popover */
+  --popover: 0 0% 100%; /* white */
+  --popover-foreground: 0 0% 0%; /* black */
+
+  /* Primary - Sky Blue Accent */
+  --primary: 199 89% 48%; /* #0EA5E9 - sky-500 */
+  --primary-foreground: 0 0% 100%; /* white */
+
+  /* Secondary - Light Gray */
+  --secondary: 0 0% 96%; /* gray-100 */
+  --secondary-foreground: 0 0% 0%; /* black */
+
+  /* Muted - Light Gray for backgrounds */
+  --muted: 0 0% 98%; /* gray-50 */
+  --muted-foreground: 0 0% 45%; /* gray-600 */
+
+  /* Accent - Sky Blue */
+  --accent: 199 89% 48%; /* #0EA5E9 - sky-500 */
+  --accent-foreground: 0 0% 100%; /* white */
+
+  /* Destructive */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Border & Input */
+  --border: 0 0% 90%; /* gray-200 */
+  --input: 0 0% 90%; /* gray-200 */
+  --ring: 199 89% 48%; /* sky-500 for focus rings */
+
+  /* Border Radius - SnowUI uses 8px default */
+  --radius: 0.5rem; /* 8px */
+
+  /* Chart colors */
+  --chart-1: 199 89% 48%; /* sky-500 */
+  --chart-2: 199 89% 40%; /* sky-600 */
+  --chart-3: 199 89% 32%; /* sky-700 */
+  --chart-4: 0 0% 60%; /* gray-500 */
+  --chart-5: 0 0% 30%; /* gray-700 */
+}
+
+.dark {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

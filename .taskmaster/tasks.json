@@ -1,0 +1,946 @@
+{
+  "project": "Raply",
+  "version": "2.2.0",
+  "flow": "Landing Page → Auth → Dashboard (Freemium) → Optional: Stripe Upgrade",
+  "mvpStrategy": "Phase 1 (Freemium MVP) → Launch → Phase 2 (Add Stripe)",
+  "tasks": [
+    {
+      "id": 0,
+      "title": "Landing Page (Marketing Site)",
+      "description": "Create public marketing landing page with SnowUI components from Figma",
+      "status": "completed",
+      "priority": "critical",
+      "assignee": "claude",
+      "tags": ["landing", "marketing", "snowui", "public"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "0.1",
+          "title": "Fetch SnowUI components from Figma for landing page",
+          "status": "completed",
+          "estimatedTime": "1h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-?node-id=8300-425"
+        },
+        {
+          "id": "0.2",
+          "title": "Create landing page layout (/page.tsx)",
+          "status": "completed",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "0.3",
+          "title": "Implement hero section with CTA",
+          "status": "completed",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "0.4",
+          "title": "Create features section (benefits of Raply)",
+          "status": "completed",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "0.5",
+          "title": "Add pricing section with plan cards",
+          "status": "completed",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "0.6",
+          "title": "Create testimonials/social proof section",
+          "status": "completed",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "0.7",
+          "title": "Add footer with links and company info",
+          "status": "completed",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "0.8",
+          "title": "Implement responsive design (mobile + tablet)",
+          "status": "completed",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "0.9",
+          "title": "Add navigation bar with login/signup CTAs",
+          "status": "completed",
+          "estimatedTime": "1h"
+        }
+      ],
+      "dependencies": [],
+      "estimatedTime": "13h",
+      "phase": "Landing & Marketing",
+      "notes": "Use SnowUI Design System from Figma. Generate components via Figma MCP. Critical for user acquisition.",
+      "completedAt": "2025-10-13"
+    },
+    {
+      "id": 1,
+      "title": "Project Initialization & Setup",
+      "description": "Set up Next.js project with all required dependencies and initial configuration",
+      "status": "completed",
+      "priority": "critical",
+      "assignee": "claude",
+      "tags": ["setup", "infrastructure"],
+      "subtasks": [
+        {
+          "id": "1.1",
+          "title": "Initialize Next.js 15 project with TypeScript",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "1.2",
+          "title": "Install and configure Tailwind CSS",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "1.3",
+          "title": "Set up Supabase client (auth, database)",
+          "status": "completed",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "1.4",
+          "title": "Configure environment variables structure",
+          "status": "completed",
+          "estimatedTime": "15m"
+        },
+        {
+          "id": "1.5",
+          "title": "Set up TypeScript strict config + Zod",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "1.6",
+          "title": "Create basic file structure (/app, /components, /lib)",
+          "status": "completed",
+          "estimatedTime": "30m"
+        }
+      ],
+      "dependencies": [],
+      "estimatedTime": "3h",
+      "phase": "Foundation",
+      "notes": "Foundation for entire project. Must be done first.",
+      "completedAt": "2025-10-07"
+    },
+    {
+      "id": 2,
+      "title": "Supabase Database Schema Setup",
+      "description": "Design and implement database schema for users, reports, accounts, campaigns, and subscriptions",
+      "status": "completed",
+      "priority": "critical",
+      "assignee": "claude",
+      "tags": ["database", "supabase"],
+      "subtasks": [
+        {
+          "id": "2.1",
+          "title": "Create users table with profile fields",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "2.2",
+          "title": "Create ad_accounts table (Meta + Google)",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "2.3",
+          "title": "Create reports table with metadata",
+          "status": "completed",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "2.4",
+          "title": "Create campaigns_data table for cached API data",
+          "status": "completed",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "2.5",
+          "title": "Create subscriptions table for Stripe data",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "2.6",
+          "title": "Set up RLS policies for all tables",
+          "status": "completed",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "2.7",
+          "title": "Create database migrations and seed data",
+          "status": "completed",
+          "estimatedTime": "30m"
+        }
+      ],
+      "dependencies": [1],
+      "estimatedTime": "4.5h",
+      "phase": "Foundation",
+      "notes": "RLS policies are critical for security. Document each policy. Added subscriptions table for Stripe integration.",
+      "completedAt": "2025-10-07"
+    },
+    {
+      "id": 2.8,
+      "title": "Admin Role System",
+      "description": "Implement admin role with unlimited access and admin-only features for platform management",
+      "status": "completed",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["admin", "rbac", "database", "security"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "2.8.1",
+          "title": "Add role column to users table (enum: 'user', 'admin')",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "2.8.2",
+          "title": "Update RLS policies to allow admin bypass on all tables",
+          "status": "completed",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "2.8.3",
+          "title": "Create isAdmin() helper function in /lib/utils/auth.ts",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "2.8.4",
+          "title": "Seed admin user (chudziszewski221@gmail.com) via migration",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "2.8.5",
+          "title": "Create admin middleware for /admin routes",
+          "status": "completed",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "2.8.6",
+          "title": "Create admin dashboard page (/admin) with SnowUI",
+          "status": "completed",
+          "estimatedTime": "1h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-"
+        },
+        {
+          "id": "2.8.7",
+          "title": "Add user management interface (list users, view details, change roles)",
+          "status": "completed",
+          "estimatedTime": "1.5h"
+        }
+      ],
+      "dependencies": [2],
+      "estimatedTime": "5.5h",
+      "phase": "Foundation",
+      "notes": "Admin role bypasses ALL usage limits and feature gates. Admins get: unlimited accounts, unlimited reports, all AI features enabled, access to all data (for support), user management, system analytics. Critical for platform management and debugging. Admin email: chudziszewski221@gmail.com",
+      "completedAt": "2025-10-13"
+    },
+    {
+      "id": 3,
+      "title": "Authentication System (Email + OAuth)",
+      "description": "Implement Supabase auth with email/password and prepare for Meta/Google OAuth",
+      "status": "completed",
+      "priority": "critical",
+      "assignee": "claude",
+      "tags": ["auth", "security"],
+      "subtasks": [
+        {
+          "id": "3.1",
+          "title": "Create signin page with SnowUI components (/auth/signin)",
+          "status": "completed",
+          "estimatedTime": "1h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-"
+        },
+        {
+          "id": "3.2",
+          "title": "Create signup page with SnowUI components (/auth/signup)",
+          "status": "completed",
+          "estimatedTime": "1h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-"
+        },
+        {
+          "id": "3.3",
+          "title": "Implement Supabase auth helper functions",
+          "status": "completed",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "3.4",
+          "title": "Create protected route middleware",
+          "status": "completed",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "3.5",
+          "title": "Add password reset flow",
+          "status": "completed",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "3.6",
+          "title": "Create auth callback handler (/auth/callback)",
+          "status": "completed",
+          "estimatedTime": "30m"
+        }
+      ],
+      "dependencies": [2],
+      "estimatedTime": "5h",
+      "phase": "Auth & Onboarding",
+      "notes": "OAuth will be added in separate task after email auth works. Use SnowUI for form components.",
+      "completedAt": "2025-10-07"
+    },
+    {
+      "id": 3.5,
+      "title": "Stripe Integration & Subscription Management",
+      "description": "Implement Stripe payment system with subscription plans (Starter, Pro, Agency)",
+      "status": "pending",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["payments", "stripe", "subscription"],
+      "mvpPhase": 2,
+      "subtasks": [
+        {
+          "id": "3.5.1",
+          "title": "Set up Stripe account and get API keys",
+          "status": "pending",
+          "estimatedTime": "30m",
+          "notes": "Requires Bartłomiej's Stripe account"
+        },
+        {
+          "id": "3.5.2",
+          "title": "Install Stripe SDK and configure client",
+          "status": "pending",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "3.5.3",
+          "title": "Create Stripe products and prices in dashboard (Starter/Pro/Agency)",
+          "status": "pending",
+          "estimatedTime": "1h",
+          "notes": "Plans: Starter 47zł, Pro 87zł, Agency 177zł"
+        },
+        {
+          "id": "3.5.4",
+          "title": "Create pricing page with plan comparison (/pricing)",
+          "status": "pending",
+          "estimatedTime": "2h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-"
+        },
+        {
+          "id": "3.5.5",
+          "title": "Implement Stripe Checkout session API route",
+          "status": "pending",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "3.5.6",
+          "title": "Create Stripe webhook handler for subscription events",
+          "status": "pending",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "3.5.7",
+          "title": "Create success/cancel pages after checkout",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "3.5.8",
+          "title": "Implement subscription status checking middleware",
+          "status": "pending",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "3.5.9",
+          "title": "Add subscription management in settings (upgrade/cancel)",
+          "status": "pending",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "3.5.10",
+          "title": "Create customer portal link for billing management",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "3.5.11",
+          "title": "Implement usage-based limits per plan (accounts, reports)",
+          "status": "pending",
+          "estimatedTime": "2h"
+        }
+      ],
+      "dependencies": [3],
+      "estimatedTime": "15h",
+      "phase": "Payments & Subscriptions",
+      "notes": "Freemium model: Users start with free plan (1 account, 2 reports/month, no AI). Stripe enables upgrade to Starter (47zł, 5 accounts, 10 reports), Pro (87zł, 10 accounts, unlimited), Agency (177zł, 20 accounts, team features). Can be implemented after dashboard is working."
+    },
+    {
+      "id": 4,
+      "title": "Meta Ads OAuth Integration",
+      "description": "Implement Meta Ads OAuth flow and data fetching",
+      "status": "pending",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["integration", "meta-ads", "oauth"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "4.1",
+          "title": "Set up Meta App in Meta for Developers",
+          "status": "pending",
+          "estimatedTime": "30m",
+          "notes": "Requires Bartłomiej's Meta account"
+        },
+        {
+          "id": "4.2",
+          "title": "Create OAuth connection page for Meta Ads",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "4.3",
+          "title": "Implement Meta OAuth callback handler",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "4.4",
+          "title": "Create Meta Ads API wrapper (/lib/api/meta-ads.ts)",
+          "status": "pending",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "4.5",
+          "title": "Implement fetch campaigns data function",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "4.6",
+          "title": "Store Meta tokens in Supabase (encrypted)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        }
+      ],
+      "dependencies": [3],
+      "estimatedTime": "6.5h",
+      "phase": "Integrations",
+      "notes": "Meta Marketing API requires business verification in production. Freemium users can connect 1 account, paid users get more. Implement account limits based on subscription tier."
+    },
+    {
+      "id": 5,
+      "title": "Google Ads OAuth Integration",
+      "description": "Implement Google Ads OAuth flow and data fetching",
+      "status": "pending",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["integration", "google-ads", "oauth"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "5.1",
+          "title": "Set up project in Google Cloud Console",
+          "status": "pending",
+          "estimatedTime": "30m",
+          "notes": "Requires Bartłomiej's Google account"
+        },
+        {
+          "id": "5.2",
+          "title": "Create OAuth connection page for Google Ads",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "5.3",
+          "title": "Implement Google OAuth callback handler",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "5.4",
+          "title": "Create Google Ads API wrapper (/lib/api/google-ads.ts)",
+          "status": "pending",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "5.5",
+          "title": "Implement fetch campaigns data function",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "5.6",
+          "title": "Store Google tokens in Supabase (encrypted)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        }
+      ],
+      "dependencies": [3],
+      "estimatedTime": "6.5h",
+      "phase": "Integrations",
+      "notes": "Can be done in parallel with task 4. Freemium users can connect 1 account, paid users get more. Implement account limits based on subscription tier."
+    },
+    {
+      "id": 6,
+      "title": "Dashboard Home Page",
+      "description": "Create main protected dashboard with SnowUI components, reports list and quick stats",
+      "status": "completed",
+      "priority": "critical",
+      "assignee": "claude",
+      "tags": ["ui", "dashboard", "snowui"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "6.1",
+          "title": "Fetch SnowUI dashboard components from Figma",
+          "status": "completed",
+          "estimatedTime": "1h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-"
+        },
+        {
+          "id": "6.2",
+          "title": "Create dashboard layout with navigation",
+          "status": "completed",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "6.3",
+          "title": "Create reports list component",
+          "status": "completed",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "6.4",
+          "title": "Create quick stats cards component",
+          "status": "completed",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "6.5",
+          "title": "Implement fetch reports query",
+          "status": "completed",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "6.6",
+          "title": "Add loading states and error handling",
+          "status": "completed",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "6.7",
+          "title": "Add empty state (no reports yet)",
+          "status": "completed",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "6.8",
+          "title": "Add subscription status banner if plan limits reached",
+          "status": "completed",
+          "estimatedTime": "1h"
+        }
+      ],
+      "dependencies": [3],
+      "estimatedTime": "8h",
+      "phase": "Dashboard",
+      "notes": "Use SnowUI Design System. Dashboard accessible immediately after signup (Freemium plan). Show upgrade prompts when free plan limits reached (1 account, 2 reports/month). Critical for MVP - core product experience.",
+      "completedAt": "2025-10-13"
+    },
+    {
+      "id": 7,
+      "title": "Report Creator Wizard",
+      "description": "Multi-step form to create new report using SnowUI components (account → template → dates → generate)",
+      "status": "pending",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["ui", "reports", "wizard", "snowui"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "7.1",
+          "title": "Fetch SnowUI wizard/stepper components from Figma",
+          "status": "pending",
+          "estimatedTime": "1h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-"
+        },
+        {
+          "id": "7.2",
+          "title": "Create wizard layout component",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "7.3",
+          "title": "Step 1: Select ad account (Meta/Google)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "7.4",
+          "title": "Step 2: Select template (leady, sprzedaż, zasięg)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "7.5",
+          "title": "Step 3: Select date range with presets",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "7.6",
+          "title": "Step 4: Review and generate button",
+          "status": "pending",
+          "estimatedTime": "45m"
+        },
+        {
+          "id": "7.7",
+          "title": "Implement form state management (Zod validation)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "7.8",
+          "title": "Create report generation API endpoint",
+          "status": "pending",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "7.9",
+          "title": "Add plan limit checking before generation (2 reports/month for free, more for paid)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        }
+      ],
+      "dependencies": [4, 5, 6],
+      "estimatedTime": "10h",
+      "phase": "Core Features",
+      "notes": "Critical user flow. Must be smooth and intuitive. Check plan limits before report creation: Free (2/month), Starter (10/month), Pro/Agency (unlimited). Show upgrade prompt when limit reached."
+    },
+    {
+      "id": 8,
+      "title": "Claude API Integration for AI Insights",
+      "description": "Integrate Claude API to generate report descriptions and recommendations",
+      "status": "pending",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["ai", "claude-api"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "8.1",
+          "title": "Create Claude API client wrapper",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "8.2",
+          "title": "Design prompt for campaign description",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "8.3",
+          "title": "Design prompt for recommendations",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "8.4",
+          "title": "Create API route for AI insights generation",
+          "status": "pending",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "8.5",
+          "title": "Implement caching for AI responses",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "8.6",
+          "title": "Add error handling and fallback responses",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "8.7",
+          "title": "Implement plan-based AI features (basic for Starter, full for Pro/Agency)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        }
+      ],
+      "dependencies": [7],
+      "estimatedTime": "7.5h",
+      "phase": "Core Features",
+      "notes": "Prompts should output structured JSON for easy parsing. AI features per plan: Free (NO AI, just raw data), Starter (basic descriptions), Pro/Agency (full AI descriptions + recommendations). Gate features based on user's plan."
+    },
+    {
+      "id": 9,
+      "title": "Report Preview Page",
+      "description": "Display generated report with SnowUI components, metrics, AI insights, and campaigns table",
+      "status": "pending",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["ui", "reports", "snowui"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "9.1",
+          "title": "Fetch SnowUI data display components from Figma",
+          "status": "pending",
+          "estimatedTime": "1h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-"
+        },
+        {
+          "id": "9.2",
+          "title": "Create report preview layout",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "9.3",
+          "title": "Create metrics cards component (ROAS, CTR, CPM, etc.)",
+          "status": "pending",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "9.4",
+          "title": "Create AI insights section component",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "9.5",
+          "title": "Create campaigns data table component",
+          "status": "pending",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "9.6",
+          "title": "Add period comparison indicators (↑↓)",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "9.7",
+          "title": "Implement data fetching and error handling",
+          "status": "pending",
+          "estimatedTime": "1h"
+        }
+      ],
+      "dependencies": [8],
+      "estimatedTime": "8.5h",
+      "phase": "Core Features",
+      "notes": "This is what client sees - must look professional. Use SnowUI for consistent design."
+    },
+    {
+      "id": 10,
+      "title": "PDF Export Functionality",
+      "description": "Generate PDF from report data using React-PDF",
+      "status": "pending",
+      "priority": "medium",
+      "assignee": "claude",
+      "tags": ["export", "pdf"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "10.1",
+          "title": "Set up React-PDF library",
+          "status": "pending",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "10.2",
+          "title": "Create PDF template component",
+          "status": "pending",
+          "estimatedTime": "2h"
+        },
+        {
+          "id": "10.3",
+          "title": "Implement PDF generation API route",
+          "status": "pending",
+          "estimatedTime": "1.5h"
+        },
+        {
+          "id": "10.4",
+          "title": "Add logo and branding customization",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "10.5",
+          "title": "Create download button with loading state",
+          "status": "pending",
+          "estimatedTime": "30m"
+        }
+      ],
+      "dependencies": [9],
+      "estimatedTime": "5.5h",
+      "phase": "Export & Polish",
+      "notes": "PDF should match preview as closely as possible."
+    },
+    {
+      "id": 11,
+      "title": "Email Report Sending (Resend)",
+      "description": "Send reports via email to clients using Resend API",
+      "status": "pending",
+      "priority": "medium",
+      "assignee": "claude",
+      "tags": ["email", "integration"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "11.1",
+          "title": "Set up Resend API client",
+          "status": "pending",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "11.2",
+          "title": "Create email template for report delivery",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "11.3",
+          "title": "Create send email API route",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "11.4",
+          "title": "Add send email modal in report preview",
+          "status": "pending",
+          "estimatedTime": "1h"
+        },
+        {
+          "id": "11.5",
+          "title": "Implement email validation and error handling",
+          "status": "pending",
+          "estimatedTime": "45m"
+        }
+      ],
+      "dependencies": [10],
+      "estimatedTime": "4.5h",
+      "phase": "Export & Polish",
+      "notes": "Consider rate limiting to avoid spam."
+    }
+  ],
+  "metadata": {
+    "totalTasks": 13,
+    "completedTasks": 6,
+    "pendingTasks": 7,
+    "estimatedTotalTime": "103.5h",
+    "mvpFlow": "Landing Page → Auth → Dashboard (Freemium) → Optional: Stripe Upgrade",
+    "businessModel": "Freemium: Free (1 account, 2 reports/month, no AI) → Starter (47zł) → Pro (87zł) → Agency (177zł)",
+    "designSystem": "SnowUI (Figma: rsAgXxuFxr1P1GY3RTiZBk)",
+    "lastUpdated": "2025-10-13",
+    "phasing": {
+      "strategy": "Phase 1 (Freemium MVP) → Launch → Phase 2 (Add Stripe)",
+      "phase1": {
+        "name": "Freemium MVP",
+        "tasks": [0, 2.8, 4, 5, 6, 7, 8, 9, 10, 11],
+        "estimatedTime": "88.5h",
+        "timeline": "~2 weeks",
+        "features": [
+          "Landing page",
+          "Admin role (unlimited access for chudziszewski221@gmail.com)",
+          "Dashboard (freemium plan default)",
+          "Meta Ads OAuth",
+          "Google Ads OAuth",
+          "Report wizard",
+          "Claude AI (gated by plan: free=no AI, paid=full AI)",
+          "Report preview",
+          "PDF export",
+          "Email sending"
+        ],
+        "limits": {
+          "free": {
+            "accounts": 1,
+            "reportsPerMonth": 2,
+            "aiEnabled": false,
+            "customBranding": false
+          },
+          "admin": {
+            "accounts": "unlimited",
+            "reportsPerMonth": "unlimited",
+            "aiEnabled": true,
+            "customBranding": true
+          }
+        }
+      },
+      "phase2": {
+        "name": "Monetization (Stripe)",
+        "tasks": [3.5],
+        "estimatedTime": "15h",
+        "timeline": "~2 days",
+        "features": [
+          "Stripe checkout",
+          "Paid plans (Starter, Pro, Agency)",
+          "Upgrade flow from dashboard",
+          "Subscription management",
+          "Usage-based limits per plan",
+          "Enable AI features for paid users"
+        ]
+      }
+    },
+    "phases": [
+      {
+        "name": "Landing & Marketing",
+        "tasks": [0],
+        "status": "completed"
+      },
+      {
+        "name": "Foundation",
+        "tasks": [1, 2, 2.8],
+        "status": "completed"
+      },
+      {
+        "name": "Auth & Onboarding",
+        "tasks": [3],
+        "status": "completed"
+      },
+      {
+        "name": "Dashboard",
+        "tasks": [6],
+        "status": "completed"
+      },
+      {
+        "name": "Integrations",
+        "tasks": [4, 5],
+        "status": "pending",
+        "priority": "CRITICAL - Data sources for reports"
+      },
+      {
+        "name": "Core Features",
+        "tasks": [7, 8, 9],
+        "status": "pending",
+        "priority": "CRITICAL - Report generation & AI"
+      },
+      {
+        "name": "Export & Polish",
+        "tasks": [10, 11],
+        "status": "pending",
+        "priority": "HIGH - Report delivery"
+      },
+      {
+        "name": "Payments & Subscriptions",
+        "tasks": [3.5],
+        "status": "pending",
+        "priority": "HIGH - Monetization (can be done after core product works)"
+      }
+    ]
+  }
+}

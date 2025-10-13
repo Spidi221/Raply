@@ -1,0 +1,107 @@
+language: "pl"
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - main
+      - develop
+
+# Raply-specific rules
+chat:
+  auto_reply: true
+
+knowledge_base:
+  learnings:
+    scope: "global"
+
+# Focus areas for Raply project
+review:
+  rules:
+    # TypeScript & Type Safety
+    - "Verify all TypeScript types are explicitly defined (no 'any')"
+    - "Check if all async functions have proper error handling (try/catch)"
+    - "Validate Zod schemas are used for all external data (API responses, form inputs)"
+
+    # Next.js Best Practices
+    - "Ensure Server Components are used by default (check for 'use client' necessity)"
+    - "Verify proper data fetching patterns (no client-side fetching in Server Components)"
+    - "Check if loading.tsx and error.tsx are present for routes with data fetching"
+    - "Validate metadata export for SEO in all page.tsx files"
+
+    # Security
+    - "Check if Supabase RLS policies are mentioned/documented for database operations"
+    - "Verify environment variables are properly typed and validated"
+    - "Ensure no sensitive data (API keys, tokens) in client components"
+    - "Validate OAuth implementation follows security best practices"
+
+    # Performance
+    - "Check for unnecessary 'use client' directives"
+    - "Verify images use Next.js Image component with proper optimization"
+    - "Validate proper use of React.Suspense for loading states"
+    - "Check if data fetching is parallel where possible (Promise.all)"
+
+    # Code Style & Maintainability
+    - "Ensure ONLY Tailwind utility classes (no custom CSS, no inline styles)"
+    - "Verify Shadcn/ui components are used instead of custom UI components"
+    - "Check if complex logic has comments explaining 'why' (not 'what')"
+    - "Validate proper file structure: /app for routes, /components for UI, /lib for logic"
+
+    # AI & Business Logic
+    - "Verify Claude API calls have proper error handling and fallbacks"
+    - "Check if Meta Ads / Google Ads API calls are properly typed"
+    - "Validate report generation logic handles edge cases (no data, API errors)"
+
+  ignore:
+    - "node_modules/**"
+    - ".next/**"
+    - "build/**"
+    - "*.config.js"
+    - "public/**"
+    - "*.md"
+
+  effort_level: "medium"
+
+  # Auto-approve patterns
+  auto_approve:
+    enabled: false
+
+# Custom instructions for Raply
+instructions: |
+  Raply is a SaaS for automated advertising reports (Meta Ads, Google Ads).
+
+  Tech stack:
+  - Next.js 15 App Router
+  - TypeScript (strict mode)
+  - Supabase (auth, database, storage)
+  - Shadcn/ui + Tailwind CSS
+  - Claude API for AI insights
+
+  MVP priorities:
+  1. OAuth Meta + Google → fetch campaign data
+  2. Dashboard with reports list
+  3. Report creator (account → template → dates → generate)
+  4. Claude API: descriptions + recommendations
+  5. Preview: metrics + AI insights
+  6. Export: PDF + email
+
+  Code review focus:
+  - Security (Supabase RLS, OAuth, env vars)
+  - Performance (Server Components first, proper data fetching)
+  - Type safety (TypeScript strict, Zod validation)
+  - Code style (Tailwind only, Shadcn/ui components)
+  - Error handling (try/catch, loading states, error boundaries)
+
+  Reject if:
+  - Custom CSS instead of Tailwind
+  - 'any' types without justification
+  - Missing error handling in async functions
+  - Client components when Server Component would work
+  - Hardcoded values that should be env vars
+  - Missing RLS documentation for database queries
