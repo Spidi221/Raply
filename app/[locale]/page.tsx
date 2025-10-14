@@ -15,7 +15,12 @@ export const metadata = {
     'Generate professional advertising reports from Meta Ads and Google Ads in 5 minutes. With AI-powered insights that actually help. Start free, no credit card required.',
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
   const supabase = await createClient()
 
   const {
@@ -24,7 +29,7 @@ export default async function HomePage() {
 
   // If user is logged in, redirect to dashboard
   if (user) {
-    redirect('/dashboard')
+    redirect(`/${locale}/dashboard`)
   }
 
   return (

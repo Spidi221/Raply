@@ -1,11 +1,14 @@
 'use client'
 
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Sparkles } from 'lucide-react'
 
 export function Hero() {
+  const params = useParams()
+  const locale = params.locale as string
   const t = useTranslations('hero')
 
   return (
@@ -34,7 +37,7 @@ export function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
               <Button asChild size="lg" className="text-base">
-                <Link href="/signup">
+                <Link href={`/${locale}/signup`}>
                   {t('ctaPrimary')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

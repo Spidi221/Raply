@@ -1,11 +1,14 @@
 'use client'
 
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { LanguageSwitcher } from '@/components/ui/language-switcher'
 
 export function Navbar() {
+  const params = useParams()
+  const locale = params.locale as string
   const t = useTranslations('navbar')
 
   return (
@@ -42,10 +45,10 @@ export function Navbar() {
         <div className="flex items-center space-x-4">
           <LanguageSwitcher />
           <Button asChild variant="outline" size="default">
-            <Link href="/signin">{t('login')}</Link>
+            <Link href={`/${locale}/signin`}>{t('login')}</Link>
           </Button>
           <Button asChild size="default">
-            <Link href="/signup">{t('startFree')}</Link>
+            <Link href={`/${locale}/signup`}>{t('startFree')}</Link>
           </Button>
         </div>
       </div>

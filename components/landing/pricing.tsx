@@ -1,12 +1,15 @@
 'use client'
 
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Check } from 'lucide-react'
 
 export function Pricing() {
+  const params = useParams()
+  const locale = params.locale as string
   const t = useTranslations('pricing')
 
   const plans = [
@@ -135,7 +138,7 @@ export function Pricing() {
                   className="mb-6 w-full"
                   size="lg"
                 >
-                  <Link href="/signup">{plan.cta}</Link>
+                  <Link href={`/${locale}/signup`}>{plan.cta}</Link>
                 </Button>
 
                 <ul className="space-y-3">

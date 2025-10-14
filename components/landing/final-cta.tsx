@@ -1,11 +1,14 @@
 'use client'
 
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 
 export function FinalCTA() {
+  const params = useParams()
+  const locale = params.locale as string
   const t = useTranslations('finalCta')
 
   return (
@@ -23,7 +26,7 @@ export function FinalCTA() {
             size="lg"
             className="bg-background text-foreground hover:bg-background/90"
           >
-            <Link href="/signup">
+            <Link href={`/${locale}/signup`}>
               {t('ctaPrimary')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
