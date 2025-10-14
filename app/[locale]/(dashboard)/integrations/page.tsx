@@ -3,10 +3,11 @@ import { redirect } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Facebook, Chrome, Plus, CheckCircle2, XCircle } from 'lucide-react'
+import { Facebook, Chrome, Plus, CheckCircle2 } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { ConnectMetaButton } from '@/components/integrations/connect-meta-button'
 import { ConnectGoogleButton } from '@/components/integrations/connect-google-button'
+import { DisconnectButton } from '@/components/integrations/disconnect-button'
 
 export const metadata = {
   title: 'Integrations | Raply',
@@ -175,10 +176,10 @@ export default async function IntegrationsPage({
                       <span>{t('feature3')}</span>
                     </div>
                     {integration.connected ? (
-                      <Button variant="outline" className="w-full" disabled>
-                        <XCircle className="mr-2 h-4 w-4" />
-                        {t('disconnectButton')}
-                      </Button>
+                      <DisconnectButton
+                        platform={integration.id as 'meta' | 'google'}
+                        label={t('disconnectButton')}
+                      />
                     ) : integration.id === 'meta' ? (
                       <ConnectMetaButton locale={locale} label={t('connectButton')} />
                     ) : integration.id === 'google' ? (
