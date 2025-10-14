@@ -238,3 +238,46 @@ export async function getCurrentSession() {
     }
   }
 }
+
+/**
+ * Sign in with Google OAuth
+ */
+export async function signInWithGoogle(locale: string) {
+  try {
+    const supabase = await createClient()
+    const origin = (await headers()).get('origin')
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${origin}/${locale}/auth/callback`,
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
+      },
+    })
+
+    if (error) {
+      return {
+        success: false,
+        error: error.message,
+      }
+    }
+
+    // Redirect to Google OAuth URL
+    if (data.url) {
+      redirect(data.url)
+    }
+
+    return {
+      success: true,
+    }
+  } catch (error) {
+    console.error('Google sign in error:', error)
+    return {
+      success: false,
+      error: 'An unexpected error occurred',
+    }
+  }
+}
