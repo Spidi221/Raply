@@ -1,3 +1,5 @@
+'use client'
+
 import { FileText, Link as LinkIcon, TrendingUp } from 'lucide-react'
 import { StatCardV2 } from './stat-card-v2'
 
