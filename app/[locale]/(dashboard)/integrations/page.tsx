@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Facebook, Chrome, Plus, CheckCircle2, XCircle } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
+import { ConnectMetaButton } from '@/components/integrations/connect-meta-button'
 
 export const metadata = {
   title: 'Integrations | Raply',
@@ -34,7 +35,7 @@ export default async function IntegrationsPage({
     .select('*')
     .eq('user_id', user.id)
 
-  const hasMetaAds = accounts?.some((acc) => acc.platform === 'facebook')
+  const hasMetaAds = accounts?.some((acc) => acc.platform === 'meta')
   const hasGoogleAds = accounts?.some((acc) => acc.platform === 'google')
 
   const integrations = [
@@ -94,11 +95,11 @@ export default async function IntegrationsPage({
                 >
                   <div className="flex items-center gap-3">
                     <div className={`p-2 rounded-lg ${
-                      account.platform === 'facebook'
+                      account.platform === 'meta'
                         ? 'bg-[#1877F2]/10'
                         : 'bg-[#4285F4]/10'
                     }`}>
-                      {account.platform === 'facebook' ? (
+                      {account.platform === 'meta' ? (
                         <Facebook className="h-5 w-5 text-[#1877F2]" />
                       ) : (
                         <Chrome className="h-5 w-5 text-[#4285F4]" />
@@ -177,6 +178,8 @@ export default async function IntegrationsPage({
                         <XCircle className="mr-2 h-4 w-4" />
                         {t('disconnectButton')}
                       </Button>
+                    ) : integration.id === 'meta' ? (
+                      <ConnectMetaButton locale={locale} label={t('connectButton')} />
                     ) : (
                       <Button className="w-full" disabled>
                         <Plus className="mr-2 h-4 w-4" />
