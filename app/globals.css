@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
-/* SnowUI Design System - Minimalist Black & White with Sky Blue Accent */
+/* Raply Design System - Based on Logo Colors */
 :root {
   /* Base Colors */
   --background: 0 0% 100%; /* white */
-  --foreground: 0 0% 0%; /* black */
+  --foreground: 213 74% 26%; /* #0E3B7A - Deep Navy Blue from logo */
 
   /* Card */
   --card: 0 0% 100%; /* white */
-  --card-foreground: 0 0% 0%; /* black */
+  --card-foreground: 213 74% 26%; /* Deep Navy Blue */
 
   /* Popover */
   --popover: 0 0% 100%; /* white */
-  --popover-foreground: 0 0% 0%; /* black */
+  --popover-foreground: 213 74% 26%; /* Deep Navy Blue */
 
-  /* Primary - Sky Blue Accent */
-  --primary: 199 89% 48%; /* #0EA5E9 - sky-500 */
+  /* Primary - Ocean Blue from logo */
+  --primary: 197 79% 42%; /* #1589B2 - Ocean Blue */
   --primary-foreground: 0 0% 100%; /* white */
 
-  /* Secondary - Light Gray */
-  --secondary: 0 0% 96%; /* gray-100 */
-  --secondary-foreground: 0 0% 0%; /* black */
+  /* Secondary - Cyan Blue */
+  --secondary: 191 77% 44%; /* #17A1C3 - Cyan Blue */
+  --secondary-foreground: 0 0% 100%; /* white */
 
-  /* Muted - Light Gray for backgrounds */
-  --muted: 0 0% 98%; /* gray-50 */
-  --muted-foreground: 0 0% 45%; /* gray-600 */
+  /* Muted - Light Blue tint */
+  --muted: 197 79% 96%; /* Very light blue */
+  --muted-foreground: 213 74% 26%; /* Deep Navy Blue */
 
-  /* Accent - Sky Blue */
-  --accent: 199 89% 48%; /* #0EA5E9 - sky-500 */
+  /* Accent - Bright Cyan from logo */
+  --accent: 188 79% 49%; /* #1AC9E0 - Bright Cyan */
   --accent-foreground: 0 0% 100%; /* white */
 
   /* Destructive */
@@ -35,46 +35,57 @@
   --destructive-foreground: 0 0% 100%;
 
   /* Border & Input */
-  --border: 0 0% 90%; /* gray-200 */
-  --input: 0 0% 90%; /* gray-200 */
-  --ring: 199 89% 48%; /* sky-500 for focus rings */
+  --border: 197 79% 90%; /* Light blue border */
+  --input: 197 79% 92%; /* Light blue input */
+  --ring: 197 79% 42%; /* Ocean Blue for focus rings */
 
-  /* Border Radius - SnowUI uses 8px default */
+  /* Border Radius */
   --radius: 0.5rem; /* 8px */
 
-  /* Chart colors */
-  --chart-1: 199 89% 48%; /* sky-500 */
-  --chart-2: 199 89% 40%; /* sky-600 */
-  --chart-3: 199 89% 32%; /* sky-700 */
-  --chart-4: 0 0% 60%; /* gray-500 */
-  --chart-5: 0 0% 30%; /* gray-700 */
+  /* Chart colors - Logo gradient */
+  --chart-1: 197 79% 42%; /* Ocean Blue #1589B2 */
+  --chart-2: 191 77% 44%; /* Cyan Blue #17A1C3 */
+  --chart-3: 188 79% 49%; /* Bright Cyan #1AC9E0 */
+  --chart-4: 213 74% 26%; /* Deep Navy #0E3B7A */
+  --chart-5: 197 79% 34%; /* Darker Ocean Blue */
 }
 
 .dark {
-  --background: 0 0% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 0 0% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 0 0% 9%;
-  --secondary: 0 0% 14.9%;
+  /* Dark Mode with Raply Colors */
+  --background: 213 74% 10%; /* Very dark navy */
+  --foreground: 188 79% 80%; /* Light cyan */
+
+  --card: 213 74% 12%; /* Dark navy card */
+  --card-foreground: 188 79% 80%; /* Light cyan text */
+
+  --popover: 213 74% 12%;
+  --popover-foreground: 188 79% 80%;
+
+  --primary: 188 79% 49%; /* Bright Cyan #1AC9E0 */
+  --primary-foreground: 213 74% 10%; /* Dark navy text on cyan */
+
+  --secondary: 197 79% 42%; /* Ocean Blue */
   --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 14.9%;
-  --muted-foreground: 0 0% 63.9%;
-  --accent: 0 0% 14.9%;
+
+  --muted: 213 74% 16%; /* Darker navy muted */
+  --muted-foreground: 197 79% 70%; /* Light ocean blue */
+
+  --accent: 191 77% 44%; /* Cyan Blue */
   --accent-foreground: 0 0% 98%;
+
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 14.9%;
-  --input: 0 0% 14.9%;
-  --ring: 0 0% 83.1%;
-  --chart-1: 220 70% 50%;
-  --chart-2: 160 60% 45%;
-  --chart-3: 30 80% 55%;
-  --chart-4: 280 65% 60%;
-  --chart-5: 340 75% 55%;
+
+  --border: 213 74% 20%; /* Dark navy border */
+  --input: 213 74% 18%; /* Dark navy input */
+  --ring: 188 79% 49%; /* Bright cyan ring */
+
+  /* Chart colors - same as light mode */
+  --chart-1: 197 79% 42%; /* Ocean Blue */
+  --chart-2: 191 77% 44%; /* Cyan Blue */
+  --chart-3: 188 79% 49%; /* Bright Cyan */
+  --chart-4: 213 74% 26%; /* Deep Navy */
+  --chart-5: 197 79% 34%; /* Darker Ocean Blue */
 }
 
 body {
@@ -139,17 +150,17 @@ body {
   border: 1px solid var(--color-glass-border);
 }
 
-/* Gradient Mesh Background */
+/* Gradient Mesh Background - Raply Colors */
 .gradient-mesh {
   background:
-    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(14, 59, 122, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(21, 137, 178, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(26, 201, 224, 0.08) 0%, transparent 50%);
 }
 
 .dark .gradient-mesh {
   background:
-    radial-gradient(circle at 20% 80%, rgba(96, 165, 250, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(251, 191, 36, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(21, 137, 178, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(26, 201, 224, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(14, 59, 122, 0.1) 0%, transparent 50%);
 }

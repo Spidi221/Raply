@@ -91,14 +91,21 @@ export function DashboardNav({ userEmail, isAdmin }: DashboardNavProps) {
         {/* Logo */}
         <div className="flex h-16 items-center justify-between border-b px-4">
           {!isCollapsed && (
-            <Link href={`/${locale}`} className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary" />
-              <span className="text-xl font-bold">Raply</span>
+            <Link href={`/${locale}`} className="flex items-center">
+              <img
+                src="/images/raply-logo.svg"
+                alt="Raply"
+                className="h-8 w-auto"
+              />
             </Link>
           )}
           {isCollapsed && (
             <Link href={`/${locale}`} className="flex items-center justify-center w-full">
-              <div className="h-8 w-8 rounded-lg bg-primary" />
+              <img
+                src="/images/raply-logo.svg"
+                alt="Raply"
+                className="h-8 w-8 object-contain"
+              />
             </Link>
           )}
         </div>
