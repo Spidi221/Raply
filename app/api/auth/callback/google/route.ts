@@ -84,9 +84,11 @@ export async function GET(request: NextRequest) {
     const customersResponse = await fetch(
       'https://googleads.googleapis.com/v17/customers:listAccessibleCustomers',
       {
+        method: 'GET',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
-          'developer-token': process.env.GOOGLE_ADS_DEVELOPER_TOKEN || 'PLACEHOLDER',
+          'developer-token': process.env.GOOGLE_ADS_DEVELOPER_TOKEN || '',
         },
       }
     )
@@ -101,13 +103,13 @@ export async function GET(request: NextRequest) {
         {
           user_id: user.id,
           platform: 'google',
-          platform_account_id: 'pending',
-          account_name: 'Google Ads (pending setup)',
+          platform_account_id: 'setup_required',
+          account_name: 'Google Ads (setup required)',
           currency: 'USD',
           timezone: 'UTC',
           access_token: accessToken,
           refresh_token: refreshToken,
-          status: 'pending',
+          status: 'error',
           last_sync_at: new Date().toISOString(),
         },
         {
@@ -123,7 +125,7 @@ export async function GET(request: NextRequest) {
       }
 
       return NextResponse.redirect(
-        `${origin}/${locale}/integrations?success=google_connected&status=pending_setup`
+        `${origin}/${locale}/integrations?success=google_connected&status=setup_required`
       )
     }
 
