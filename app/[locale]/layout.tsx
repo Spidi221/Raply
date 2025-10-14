@@ -13,6 +13,15 @@ const inter = Inter({
   display: 'swap',
 })
 
+export const metadata: Metadata = {
+  title: {
+    default: 'Raply - Automated Advertising Reports with AI Insights',
+    template: '%s | Raply',
+  },
+  description:
+    'Generate professional advertising reports from Meta Ads and Google Ads in 5 minutes. With AI-powered insights that actually help.',
+}
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }

@@ -15,6 +15,9 @@ export const metadata = {
     'Generate professional advertising reports from Meta Ads and Google Ads in 5 minutes. With AI-powered insights that actually help. Start free, no credit card required.',
 }
 
+// Force dynamic rendering because we check auth status
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage({
   params,
 }: {
