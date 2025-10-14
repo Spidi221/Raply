@@ -16,15 +16,14 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react'
-import type { User } from '@supabase/supabase-js'
 import { signOut } from '@/lib/auth/actions'
 
 interface DashboardNavProps {
-  user: User
+  userEmail: string
   isAdmin: boolean
 }
 
-export function DashboardNav({ user, isAdmin }: DashboardNavProps) {
+export function DashboardNav({ userEmail, isAdmin }: DashboardNavProps) {
   const pathname = usePathname()
   const t = useTranslations('dashboard.nav')
   const locale = useLocale()
@@ -157,10 +156,10 @@ export function DashboardNav({ user, isAdmin }: DashboardNavProps) {
           {!isCollapsed && (
             <div className="mb-3 flex items-center gap-3 px-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
-                {user.email?.[0]?.toUpperCase()}
+                {userEmail?.[0]?.toUpperCase()}
               </div>
               <div className="flex-1 overflow-hidden">
-                <p className="truncate text-sm font-medium">{user.email}</p>
+                <p className="truncate text-sm font-medium">{userEmail}</p>
                 {isAdmin && (
                   <p className="text-xs text-muted-foreground">Admin</p>
                 )}
@@ -170,7 +169,7 @@ export function DashboardNav({ user, isAdmin }: DashboardNavProps) {
           {isCollapsed && (
             <div className="mb-3 flex justify-center">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
-                {user.email?.[0]?.toUpperCase()}
+                {userEmail?.[0]?.toUpperCase()}
               </div>
             </div>
           )}

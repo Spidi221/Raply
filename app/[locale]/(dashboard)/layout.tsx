@@ -21,7 +21,7 @@ export default async function DashboardLayout({
   } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/signin')
+    redirect(`/${locale}/signin`)
   }
 
   const admin = await isAdmin()
@@ -29,7 +29,7 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-screen">
       {/* Sidebar Navigation */}
-      <DashboardNav user={user} isAdmin={admin} />
+      <DashboardNav userEmail={user.email || ''} isAdmin={admin} />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
