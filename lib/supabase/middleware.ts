@@ -40,26 +40,29 @@ export async function updateSession(request: NextRequest) {
   const pathnameSegments = pathname.split('/').filter(Boolean)
   const locale = pathnameSegments[0] || 'en' // Default to 'en' if no locale found
 
-  // Check if current path is an auth page (signin, signup, forgot-password, reset-password, callback)
+  // Check if current path is callback (OAuth flow)
+  const isCallback = pathname.includes('/callback')
+
+  // Check if current path is an auth page (signin, signup, forgot-password, reset-password)
   const isAuthPage =
     pathname.includes('/signin') ||
     pathname.includes('/signup') ||
     pathname.includes('/forgot-password') ||
-    pathname.includes('/reset-password') ||
-    pathname.includes('/callback')
+    pathname.includes('/reset-password')
 
   // Check if current path is root or landing page
   const isPublicPage = pathname === '/' || pathname === `/${locale}` || pathname === `/${locale}/`
 
   // Protected routes - redirect to signin if not authenticated
-  if (!user && !isAuthPage && !isPublicPage) {
+  // Callback is allowed without auth (part of OAuth flow)
+  if (!user && !isAuthPage && !isPublicPage && !isCallback) {
     const url = request.nextUrl.clone()
     url.pathname = `/${locale}/signin`
     return NextResponse.redirect(url)
   }
 
-  // Redirect to dashboard if authenticated and on auth pages
-  if (user && isAuthPage) {
+  // Redirect to dashboard if authenticated and on auth pages (but NOT callback!)
+  if (user && isAuthPage && !isCallback) {
     const url = request.nextUrl.clone()
     url.pathname = `/${locale}/dashboard`
     return NextResponse.redirect(url)
