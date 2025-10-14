@@ -7,7 +7,13 @@ export const metadata = {
   description: 'Reset your Raply account password',
 }
 
-export default function ForgotPasswordPage() {
+export default async function ForgotPasswordPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
       <div className="w-full max-w-md">
@@ -26,12 +32,12 @@ export default function ForgotPasswordPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ForgotPasswordForm />
+            <ForgotPasswordForm locale={locale} />
 
             <div className="mt-4 text-center text-sm">
               Remember your password?{' '}
               <Link
-                href="/signin"
+                href={`/${locale}/signin`}
                 className="font-medium text-primary hover:underline"
               >
                 Sign in

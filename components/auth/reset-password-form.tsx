@@ -27,7 +27,11 @@ const resetPasswordSchema = z.object({
 
 type ResetPasswordFormInput = z.infer<typeof resetPasswordSchema>
 
-export function ResetPasswordForm() {
+interface ResetPasswordFormProps {
+  locale: string
+}
+
+export function ResetPasswordForm({ locale }: ResetPasswordFormProps) {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -53,7 +57,7 @@ export function ResetPasswordForm() {
       }
 
       // Redirect to signin on success
-      router.push('/signin?password-reset=success')
+      router.push(`/${locale}/signin?password-reset=success`)
     } catch (err) {
       setError('An unexpected error occurred')
       console.error('Password update error:', err)

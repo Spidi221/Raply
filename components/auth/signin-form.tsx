@@ -12,7 +12,11 @@ import { FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/f
 import { signIn } from '@/lib/auth/actions'
 import { signInSchema, type SignInInput } from '@/lib/validators/auth'
 
-export function SignInForm() {
+interface SignInFormProps {
+  locale: string
+}
+
+export function SignInForm({ locale }: SignInFormProps) {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -38,7 +42,7 @@ export function SignInForm() {
       }
 
       // Redirect to dashboard on success
-      router.push('/dashboard')
+      router.push(`/${locale}/dashboard`)
       router.refresh()
     } catch (err) {
       setError('An unexpected error occurred')
@@ -76,7 +80,7 @@ export function SignInForm() {
         <div className="flex items-center justify-between">
           <FormLabel htmlFor="password">Password</FormLabel>
           <Link
-            href="/forgot-password"
+            href={`/${locale}/forgot-password`}
             className="text-sm text-muted-foreground hover:text-primary"
           >
             Forgot password?

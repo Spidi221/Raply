@@ -7,7 +7,13 @@ export const metadata = {
   description: 'Create your Raply account',
 }
 
-export default function SignUpPage() {
+export default async function SignUpPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
       <div className="w-full max-w-md">
@@ -26,12 +32,12 @@ export default function SignUpPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <SignUpForm />
+            <SignUpForm locale={locale} />
 
             <div className="mt-4 text-center text-sm">
               Already have an account?{' '}
               <Link
-                href="/signin"
+                href={`/${locale}/signin`}
                 className="font-medium text-primary hover:underline"
               >
                 Sign in

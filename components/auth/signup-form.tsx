@@ -11,7 +11,11 @@ import { FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/f
 import { signUp } from '@/lib/auth/actions'
 import { signUpSchema, type SignUpInput } from '@/lib/validators/auth'
 
-export function SignUpForm() {
+interface SignUpFormProps {
+  locale: string
+}
+
+export function SignUpForm({ locale }: SignUpFormProps) {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
@@ -47,7 +51,7 @@ export function SignUpForm() {
       }
 
       // Redirect to dashboard if no confirmation needed
-      router.push('/dashboard')
+      router.push(`/${locale}/dashboard`)
       router.refresh()
     } catch (err) {
       setError('An unexpected error occurred')

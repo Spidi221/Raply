@@ -6,7 +6,13 @@ export const metadata = {
   description: 'Set a new password for your Raply account',
 }
 
-export default function ResetPasswordPage() {
+export default async function ResetPasswordPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
       <div className="w-full max-w-md">
@@ -25,7 +31,7 @@ export default function ResetPasswordPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ResetPasswordForm />
+            <ResetPasswordForm locale={locale} />
           </CardContent>
         </Card>
       </div>

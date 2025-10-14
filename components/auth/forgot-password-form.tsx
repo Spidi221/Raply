@@ -10,7 +10,11 @@ import { FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/f
 import { requestPasswordReset } from '@/lib/auth/actions'
 import { resetPasswordSchema, type ResetPasswordInput } from '@/lib/validators/auth'
 
-export function ForgotPasswordForm() {
+interface ForgotPasswordFormProps {
+  locale: string
+}
+
+export function ForgotPasswordForm({ locale }: ForgotPasswordFormProps) {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
