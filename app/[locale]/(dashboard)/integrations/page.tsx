@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Facebook, Chrome, Plus, CheckCircle2, XCircle } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { ConnectMetaButton } from '@/components/integrations/connect-meta-button'
+import { ConnectGoogleButton } from '@/components/integrations/connect-google-button'
 
 export const metadata = {
   title: 'Integrations | Raply',
@@ -180,6 +181,8 @@ export default async function IntegrationsPage({
                       </Button>
                     ) : integration.id === 'meta' ? (
                       <ConnectMetaButton locale={locale} label={t('connectButton')} />
+                    ) : integration.id === 'google' ? (
+                      <ConnectGoogleButton locale={locale} label={t('connectButton')} />
                     ) : (
                       <Button className="w-full" disabled>
                         <Plus className="mr-2 h-4 w-4" />
