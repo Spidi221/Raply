@@ -46,7 +46,7 @@ export async function updateSession(request: NextRequest) {
     pathname.includes('/signup') ||
     pathname.includes('/forgot-password') ||
     pathname.includes('/reset-password') ||
-    pathname.includes('/auth/callback')
+    pathname.includes('/callback')
 
   // Check if current path is root or landing page
   const isPublicPage = pathname === '/' || pathname === `/${locale}` || pathname === `/${locale}/`
