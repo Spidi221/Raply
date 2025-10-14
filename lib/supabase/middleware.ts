@@ -40,8 +40,10 @@ export async function updateSession(request: NextRequest) {
   const pathnameSegments = pathname.split('/').filter(Boolean)
   const locale = pathnameSegments[0] || 'en' // Default to 'en' if no locale found
 
-  // Check if current path is callback (OAuth flow)
-  const isCallback = pathname.includes('/callback')
+  // Skip middleware for API routes (they handle their own auth)
+  if (pathname.startsWith('/api')) {
+    return supabaseResponse
+  }
 
   // Check if current path is an auth page (signin, signup, forgot-password, reset-password)
   const isAuthPage =
@@ -54,15 +56,14 @@ export async function updateSession(request: NextRequest) {
   const isPublicPage = pathname === '/' || pathname === `/${locale}` || pathname === `/${locale}/`
 
   // Protected routes - redirect to signin if not authenticated
-  // Callback is allowed without auth (part of OAuth flow)
-  if (!user && !isAuthPage && !isPublicPage && !isCallback) {
+  if (!user && !isAuthPage && !isPublicPage) {
     const url = request.nextUrl.clone()
     url.pathname = `/${locale}/signin`
     return NextResponse.redirect(url)
   }
 
-  // Redirect to dashboard if authenticated and on auth pages (but NOT callback!)
-  if (user && isAuthPage && !isCallback) {
+  // Redirect to dashboard if authenticated and on auth pages
+  if (user && isAuthPage) {
     const url = request.nextUrl.clone()
     url.pathname = `/${locale}/dashboard`
     return NextResponse.redirect(url)
