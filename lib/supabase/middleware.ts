@@ -40,12 +40,13 @@ export async function updateSession(request: NextRequest) {
   const pathnameSegments = pathname.split('/').filter(Boolean)
   const locale = pathnameSegments[0] || 'en' // Default to 'en' if no locale found
 
-  // Check if current path is an auth page (signin, signup, forgot-password, reset-password)
+  // Check if current path is an auth page (signin, signup, forgot-password, reset-password, callback)
   const isAuthPage =
     pathname.includes('/signin') ||
     pathname.includes('/signup') ||
     pathname.includes('/forgot-password') ||
-    pathname.includes('/reset-password')
+    pathname.includes('/reset-password') ||
+    pathname.includes('/auth/callback')
 
   // Check if current path is root or landing page
   const isPublicPage = pathname === '/' || pathname === `/${locale}` || pathname === `/${locale}/`
