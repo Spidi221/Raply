@@ -1,7 +1,6 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
 import type { SignInInput, SignUpInput } from '@/lib/validators/auth'
 
@@ -241,6 +240,7 @@ export async function getCurrentSession() {
 
 /**
  * Sign in with Google OAuth
+ * Returns the OAuth URL for client-side redirect
  */
 export async function signInWithGoogle(locale: string) {
   try {
@@ -265,13 +265,10 @@ export async function signInWithGoogle(locale: string) {
       }
     }
 
-    // Redirect to Google OAuth URL
-    if (data.url) {
-      redirect(data.url)
-    }
-
+    // Return OAuth URL for client-side redirect
     return {
       success: true,
+      url: data.url,
     }
   } catch (error) {
     console.error('Google sign in error:', error)

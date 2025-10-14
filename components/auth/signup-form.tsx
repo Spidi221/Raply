@@ -66,7 +66,19 @@ export function SignUpForm({ locale }: SignUpFormProps) {
     try {
       setIsGoogleLoading(true)
       setError(null)
-      await signInWithGoogle(locale)
+
+      const result = await signInWithGoogle(locale)
+
+      if (!result.success) {
+        setError(result.error || 'Failed to sign in with Google')
+        setIsGoogleLoading(false)
+        return
+      }
+
+      // Redirect to Google OAuth URL
+      if (result.url) {
+        window.location.href = result.url
+      }
     } catch (err) {
       setError('Failed to sign in with Google')
       console.error('Google sign in error:', err)
