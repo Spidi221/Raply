@@ -8,6 +8,7 @@ import { getTranslations } from 'next-intl/server'
 import { ConnectMetaButton } from '@/components/integrations/connect-meta-button'
 import { ConnectGoogleButton } from '@/components/integrations/connect-google-button'
 import { DisconnectButton } from '@/components/integrations/disconnect-button'
+import { SetupGoogleCustomerId } from '@/components/integrations/setup-google-customer-id'
 
 export const metadata = {
   title: 'Integrations | Raply',
@@ -123,6 +124,13 @@ export default async function IntegrationsPage({
             </div>
           </CardContent>
         </Card>
+      )}
+
+      {/* Google Ads Setup Required */}
+      {accounts?.some(acc => acc.platform === 'google' && acc.platform_account_id === 'setup_required') && (
+        <SetupGoogleCustomerId
+          accountId={accounts.find(acc => acc.platform === 'google' && acc.platform_account_id === 'setup_required')!.id}
+        />
       )}
 
       {/* Available Integrations */}
