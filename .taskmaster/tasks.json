@@ -439,6 +439,77 @@
       "notes": "Meta Marketing API requires business verification in production. Freemium users can connect 1 account, paid users get more. Implement account limits based on subscription tier."
     },
     {
+      "id": 4.5,
+      "title": "Account Selection Flow for Meta & Google Ads",
+      "description": "Implement proper account selection UI that lets users choose which ad account to connect instead of auto-selecting first account. Currently both Meta and Google OAuth flows hardcode account selection (firstAccount = adAccounts[0]), which prevents users from choosing their preferred account.",
+      "status": "pending",
+      "priority": "high",
+      "assignee": "claude",
+      "tags": ["integration", "ux", "oauth", "meta-ads", "google-ads"],
+      "mvpPhase": 1,
+      "subtasks": [
+        {
+          "id": "4.5.1",
+          "title": "Design account selection page UI with SnowUI",
+          "status": "pending",
+          "estimatedTime": "1.5h",
+          "figmaLink": "https://www.figma.com/design/rsAgXxuFxr1P1GY3RTiZBk/SnowUI-Design-System--Community-",
+          "notes": "Create /integrations/select-account page with account cards showing: account name, platform (Meta/Google), status, currency"
+        },
+        {
+          "id": "4.5.2",
+          "title": "Update Meta OAuth callback to save all accounts to session",
+          "status": "pending",
+          "estimatedTime": "1h",
+          "notes": "Instead of auto-selecting first account, save adAccounts array to session/cookies and redirect to selection page"
+        },
+        {
+          "id": "4.5.3",
+          "title": "Update Google OAuth callback to save all accounts to session",
+          "status": "pending",
+          "estimatedTime": "1h",
+          "notes": "Instead of auto-selecting first account, save customers array to session/cookies and redirect to selection page"
+        },
+        {
+          "id": "4.5.4",
+          "title": "Create API route for account selection submission",
+          "status": "pending",
+          "estimatedTime": "1.5h",
+          "notes": "POST /api/integrations/select-account - validates session, saves selected account to DB"
+        },
+        {
+          "id": "4.5.5",
+          "title": "Implement account selection page logic",
+          "status": "pending",
+          "estimatedTime": "2h",
+          "notes": "Fetch accounts from session, display account cards, handle selection, submit to API"
+        },
+        {
+          "id": "4.5.6",
+          "title": "Add multi-account support (allow connecting multiple accounts)",
+          "status": "pending",
+          "estimatedTime": "1.5h",
+          "notes": "User should be able to connect multiple accounts from same platform. Update DB unique constraint."
+        },
+        {
+          "id": "4.5.7",
+          "title": "Test full OAuth flow for Meta: connect → select account → success",
+          "status": "pending",
+          "estimatedTime": "30m"
+        },
+        {
+          "id": "4.5.8",
+          "title": "Test full OAuth flow for Google: connect → select account → success",
+          "status": "pending",
+          "estimatedTime": "30m"
+        }
+      ],
+      "dependencies": [4, 5],
+      "estimatedTime": "10h",
+      "phase": "Integrations",
+      "notes": "CRITICAL UX ISSUE: Users currently cannot choose which ad account to connect. Both Meta and Google OAuth hardcode selection to first account (adAccounts[0]). This task implements proper account selection flow with intermediate selection page. Must be done properly without half-measures (no manual account ID input workarounds). Proper solution: OAuth callback → save all accounts to session → redirect to /integrations/select-account → user chooses → save to DB."
+    },
+    {
       "id": 5,
       "title": "Google Ads OAuth Integration",
       "description": "Implement Google Ads OAuth flow and data fetching",
@@ -1208,20 +1279,20 @@
     }
   ],
   "metadata": {
-    "totalTasks": 14,
+    "totalTasks": 15,
     "completedTasks": 7,
-    "pendingTasks": 7,
-    "estimatedTotalTime": "131h",
+    "pendingTasks": 8,
+    "estimatedTotalTime": "141h",
     "mvpFlow": "Landing Page → Auth → Dashboard (Freemium) → Optional: Stripe Upgrade",
     "businessModel": "Freemium: Free (1 account, 2 reports/month, no AI) → Starter (47zł) → Pro (87zł) → Agency (177zł)",
     "designSystem": "SnowUI (Figma: rsAgXxuFxr1P1GY3RTiZBk) + Custom Professional Design from Figma Make",
-    "lastUpdated": "2025-10-13",
+    "lastUpdated": "2025-10-17",
     "phasing": {
       "strategy": "Phase 1 (Freemium MVP) → Launch → Phase 2 (Add Stripe)",
       "phase1": {
         "name": "Freemium MVP",
-        "tasks": [0, 2.8, 4, 5, 6, 12, 7, 8, 9, 10, 11],
-        "estimatedTime": "116h",
+        "tasks": [0, 2.8, 4, 4.5, 5, 6, 12, 7, 8, 9, 10, 11],
+        "estimatedTime": "126h",
         "timeline": "~3 weeks",
         "features": [
           "Landing page",
@@ -1294,9 +1365,9 @@
       },
       {
         "name": "Integrations",
-        "tasks": [4, 5],
+        "tasks": [4, 4.5, 5],
         "status": "pending",
-        "priority": "CRITICAL - Data sources for reports"
+        "priority": "CRITICAL - Data sources for reports + Account Selection UX"
       },
       {
         "name": "Core Features",
