@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { cookies } from 'next/headers'
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
@@ -97,40 +98,35 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Store ad accounts in database
-    // For now, store the first active account
-    // TODO: Let user select which account to connect
-    const firstAccount = adAccounts.find(
-      (acc: any) => acc.account_status === 1
-    ) || adAccounts[0]
-
-    const { error: insertError } = await supabase.from('ad_accounts').upsert(
-      {
-        user_id: user.id,
-        platform: 'meta',
-        platform_account_id: firstAccount.id,
-        account_name: firstAccount.name,
-        currency: firstAccount.currency || 'USD',
-        timezone: firstAccount.timezone || 'UTC',
-        access_token: accessToken,
-        status: 'active',
-        last_sync_at: new Date().toISOString(),
-      },
-      {
-        onConflict: 'user_id,platform,platform_account_id',
-      }
-    )
-
-    if (insertError) {
-      console.error('Failed to store ad account:', insertError)
-      return NextResponse.redirect(
-        `${origin}/${locale}/integrations?error=database_error`
-      )
+    // Save all ad accounts and access token to cookies for account selection
+    const pendingAccountsData = {
+      platform: 'meta',
+      accessToken,
+      accounts: adAccounts.map((acc: any) => ({
+        id: acc.id,
+        name: acc.name,
+        currency: acc.currency || 'USD',
+        timezone: acc.timezone || 'UTC',
+        account_status: acc.account_status,
+      })),
+      userId: user.id,
+      expiresAt: Date.now() + 15 * 60 * 1000, // 15 minutes expiry
     }
 
-    // Success! Redirect to integrations page
+    const cookieStore = await cookies()
+
+    // Store in cookie (max size ~4KB)
+    cookieStore.set('pending_accounts', JSON.stringify(pendingAccountsData), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 15 * 60, // 15 minutes
+      path: '/',
+    })
+
+    // Redirect to account selection page
     return NextResponse.redirect(
-      `${origin}/${locale}/integrations?success=meta_connected`
+      `${origin}/${locale}/integrations/select-account`
     )
   } catch (error) {
     console.error('Meta OAuth callback error:', error)

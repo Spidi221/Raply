@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { cookies } from 'next/headers'
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
@@ -97,35 +98,30 @@ export async function GET(request: NextRequest) {
       const errorData = await customersResponse.text()
       console.error('Failed to fetch Google Ads customers:', errorData)
 
-      // If we can't fetch customers, still save the connection
-      // User can manually provide Customer ID later
-      const { error: insertError } = await supabase.from('ad_accounts').upsert(
-        {
-          user_id: user.id,
-          platform: 'google',
-          platform_account_id: 'setup_required',
-          account_name: 'Google Ads (setup required)',
-          currency: 'USD',
-          timezone: 'UTC',
-          access_token: accessToken,
-          refresh_token: refreshToken,
-          status: 'error',
-          last_sync_at: new Date().toISOString(),
-        },
-        {
-          onConflict: 'user_id,platform,platform_account_id',
-        }
-      )
-
-      if (insertError) {
-        console.error('Failed to store ad account:', insertError)
-        return NextResponse.redirect(
-          `${origin}/${locale}/integrations?error=database_error`
-        )
+      // If we can't fetch customers, save error state to cookies
+      // User will be prompted to manually provide Customer ID
+      const pendingAccountsData = {
+        platform: 'google',
+        accessToken,
+        refreshToken,
+        accounts: [],
+        requiresManualSetup: true,
+        userId: user.id,
+        expiresAt: Date.now() + 15 * 60 * 1000, // 15 minutes expiry
       }
 
+      const cookieStore = await cookies()
+
+      cookieStore.set('pending_accounts', JSON.stringify(pendingAccountsData), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 15 * 60, // 15 minutes
+        path: '/',
+      })
+
       return NextResponse.redirect(
-        `${origin}/${locale}/integrations?success=google_connected&status=setup_required`
+        `${origin}/${locale}/integrations/select-account?status=manual_setup`
       )
     }
 
@@ -138,39 +134,42 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Extract customer ID from resource name (format: "customers/1234567890")
-    const firstCustomerId = customerIds[0].split('/')[1]
-
-    // Store the first accessible customer
-    // TODO: Let user select which customer to connect
-    const { error: insertError } = await supabase.from('ad_accounts').upsert(
-      {
-        user_id: user.id,
+    // Parse customer IDs from resource names (format: "customers/1234567890")
+    const accounts = customerIds.map((resourceName: string) => {
+      const customerId = resourceName.split('/')[1]
+      return {
+        id: customerId,
+        name: `Google Ads ${customerId}`,
         platform: 'google',
-        platform_account_id: firstCustomerId,
-        account_name: `Google Ads ${firstCustomerId}`,
-        currency: 'USD',
-        timezone: 'UTC',
-        access_token: accessToken,
-        refresh_token: refreshToken,
-        status: 'active',
-        last_sync_at: new Date().toISOString(),
-      },
-      {
-        onConflict: 'user_id,platform,platform_account_id',
+        currency: 'USD', // Default, will be updated when fetching account details
+        timezone: 'UTC', // Default, will be updated when fetching account details
       }
-    )
+    })
 
-    if (insertError) {
-      console.error('Failed to store ad account:', insertError)
-      return NextResponse.redirect(
-        `${origin}/${locale}/integrations?error=database_error`
-      )
+    // Save all customer accounts and tokens to cookies for account selection
+    const pendingAccountsData = {
+      platform: 'google',
+      accessToken,
+      refreshToken,
+      accounts,
+      userId: user.id,
+      expiresAt: Date.now() + 15 * 60 * 1000, // 15 minutes expiry
     }
 
-    // Success! Redirect to integrations page
+    const cookieStore = await cookies()
+
+    // Store in cookie (max size ~4KB)
+    cookieStore.set('pending_accounts', JSON.stringify(pendingAccountsData), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 15 * 60, // 15 minutes
+      path: '/',
+    })
+
+    // Redirect to account selection page
     return NextResponse.redirect(
-      `${origin}/${locale}/integrations?success=google_connected`
+      `${origin}/${locale}/integrations/select-account`
     )
   } catch (error) {
     console.error('Google OAuth callback error:', error)
