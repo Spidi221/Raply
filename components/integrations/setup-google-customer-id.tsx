@@ -129,7 +129,7 @@ export function SetupGoogleCustomerId({ accountId, currentCustomerId }: SetupGoo
           <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside ml-6">
             <li>Sign in to your Google Ads account</li>
             <li>Look at the top right corner of the page</li>
-            <li>You'll see a 10-digit number in format: 123-456-7890</li>
+            <li>You&apos;ll see a 10-digit number in format: 123-456-7890</li>
             <li>Copy and paste it here</li>
           </ol>
         </div>
